@@ -36,13 +36,13 @@ test('Promo proposition should appear after adding three cups of coffee', async 
 });
 
 
-test('test', async ({ page }) => {
+test('Added coffee should appear in Total list', async ({ page }) => {
   await page.goto('https://coffee-cart.app/');
   await page.locator('[data-test="Espresso"]').click();
   await page.locator('[data-test="Espresso_Macchiato"]').click();
   await page.locator('[data-test="checkout"]').hover();
   await expect(page.getByText('Espresso x 1+-')).toBeVisible();
-  await page.getByText('Espresso Macchiato x 1+-').click();
+  await expect(page.getByText('Espresso Macchiato x 1+-')).toBeVisible();
 });
 
 test('Added coffee should appear in basket', async ({ page }) => {
