@@ -6,7 +6,7 @@ test.beforeEach('Open start URL', async ({ page }) => {
 
 test.describe('Accessability attributes practice', () => {
 
-  test.only('Test1', async ({ page }) => {
+  test('Test1', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Email адреса *' }).fill('student@example.com');
     await page.getByLabel('Пароль').fill('Qwerty123');
     await page.getByRole('combobox', { name: 'Країна *' }).selectOption('Україна');
