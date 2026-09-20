@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Nine different cups of coffee with prices should be presented on main page', async ({ page }) => {
-  await page.goto('https://coffee-cart.app/');
+  await page.goto('');
 
   await expect(page.locator('#app')).toContainText('Espresso $10.00');
   await expect(page.locator('#app')).toContainText('Espresso Macchiato $12.00');
