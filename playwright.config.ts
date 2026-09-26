@@ -39,7 +39,7 @@ export default defineConfig({
       testDir: 'tests/qa-dojo-tests',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://104.168.59.50/articles',
+        baseURL: 'http://104.168.59.50/',
       },
     },
     {
