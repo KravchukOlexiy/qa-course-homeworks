@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach('Open start URL', async ({ page }) => {
-  await page.goto('http://104.168.59.50/laboratory/aria');
+  await page.goto('laboratory/aria');
 });
 
 test.describe('Accessability attributes practice', () => {

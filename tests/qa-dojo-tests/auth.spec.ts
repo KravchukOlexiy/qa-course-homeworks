@@ -1,21 +1,22 @@
 import { test, expect } from '@playwright/test';
 
-const uniqueUsername = `student-${Date.now()}`;
-const uniqueEmail = uniqueUsername + `-@example.com`;
-
 test.beforeEach('Open start URL', async ({ page }) => {
-  await page.goto('');
+  await page.goto('/articles');
 });
 
 test.describe('Registration tests', () => {
 
   test('Profile name should appear in header after success registration', async ({ page }) => {
+    const uniqueUsername = `student-${Date.now()}`;
+    const uniqueEmail = uniqueUsername + `-@example.com`;
+    const password = 'kravkrav123';
+
     await page.getByTestId('nav-sign-up').click();
     await page.getByTestId('auth-username').fill(uniqueUsername);
     await page.getByTestId('auth-email').fill(uniqueEmail);
     await page.getByTestId('auth-password').click();
-    await page.getByTestId('auth-password').fill('kravkrav123');
-    await page.getByTestId('register-confirm-password').fill('kravkrav123');
+    await page.getByTestId('auth-password').fill(password);
+    await page.getByTestId('register-confirm-password').fill(password);
     await page.getByTestId('register-terms').check();
     await page.getByTestId('auth-submit').click();
     await expect(page.getByTestId('nav-profile')).toContainText(uniqueUsername);
@@ -44,6 +45,8 @@ test.describe('Registration tests', () => {
 });
 
 test.describe('Authorization tests', () => {
+
+
   test('Profile name should appear in header after success authorization', async ({ page }) => {
     await page.getByTestId('nav-sign-in').click();
     await page.getByTestId('auth-email').click();
