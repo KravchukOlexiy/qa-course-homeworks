@@ -22,5 +22,14 @@ test.describe('Describe', () => {
         await expect(page.locator('//*[@data-testid="interactions-table-row-4"]')).toContainText('Завантаження файлу')
         await expect(page.locator('//*[@data-testid="interactions-table-row-3"]')).toContainText('Пошук за тегом')
         await expect(page.locator('//*[@data-testid="interactions-table-row-2"]')).toContainText('Створення статті')
+
+    });
+
+    test('Desc sorting should be after click on Desk sorting', async ({ page }) => {
+        await page.locator('//*[@data-testid="interactions-sort-name"]').click()
+        await expect(page.locator('//*[@data-testid="interactions-table-row-2"]')).toContainText('Створення статті')
+        await expect(page.locator('//*[@data-testid="interactions-table-row-3"]')).toContainText('Пошук за тегом')
+        await expect(page.locator('//*[@data-testid="interactions-table-row-4"]')).toContainText('Завантаження файлу')
+        await expect(page.locator('//*[@data-testid="interactions-table-row-1"]')).toContainText('Авторизація')
     });
 });
