@@ -3,18 +3,18 @@ import { test, expect } from '@playwright/test';
 const baseURL = 'https://coffee-cart.app/';
 
 test('Nine different cups of coffee with prices should be presented on main page', async ({ page }) => {
-  const coffeeTitleLocator = '#app'; 
+  const coffeeTitleLocator = page.locator('#app'); 
   await page.goto(baseURL);
 
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Espresso $10.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Espresso Macchiato $12.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Cappuccino $19.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Mocha $8.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Flat White $18.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Americano $7.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Cafe Latte $16.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Espresso Con Panna $14.00');
-  await expect(page.locator(coffeeTitleLocator)).toContainText('Cafe Breve $15.00');
+  await expect(coffeeTitleLocator).toContainText('Espresso $10.00');
+  await expect(coffeeTitleLocator).toContainText('Espresso Macchiato $12.00');
+  await expect(coffeeTitleLocator).toContainText('Cappuccino $19.00');
+  await expect(coffeeTitleLocator).toContainText('Mocha $8.00');
+  await expect(coffeeTitleLocator).toContainText('Flat White $18.00');
+  await expect(coffeeTitleLocator).toContainText('Americano $7.00');
+  await expect(coffeeTitleLocator).toContainText('Cafe Latte $16.00');
+  await expect(coffeeTitleLocator).toContainText('Espresso Con Panna $14.00');
+  await expect(coffeeTitleLocator).toContainText('Cafe Breve $15.00');
 });
 
 
@@ -32,16 +32,16 @@ test('Promo proposition should appear after adding three cups of coffee', async 
   const espressoCupLocator = page.locator('[data-test="Espresso"]');
   const espressoMacchiatoCupLocator = page.locator('[data-test="Espresso_Macchiato"]');
   const cappuccinoCupLocator = page.locator('[data-test="Cappuccino"]');
-  const promoMessageLocator = '#app'; 
+  const promoMessageLocator = page.locator('#app'); 
   await page.goto(baseURL);
 
   await espressoCupLocator.click();
   await espressoMacchiatoCupLocator.click();
   await cappuccinoCupLocator.click();
 
-  await expect(page.locator(promoMessageLocator)).toContainText('It\'s your lucky day! Get an extra cup of Mocha for $4.');
-  await expect(page.locator(promoMessageLocator)).toContainText('Yes, of course!');
-  await expect(page.locator(promoMessageLocator)).toContainText('Nah, I\'ll skip.');
+  await expect(promoMessageLocator).toContainText('It\'s your lucky day! Get an extra cup of Mocha for $4.');
+  await expect(promoMessageLocator).toContainText('Yes, of course!');
+  await expect(promoMessageLocator).toContainText('Nah, I\'ll skip.');
 });
 
 
