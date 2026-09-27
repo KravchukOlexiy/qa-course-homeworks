@@ -33,5 +33,4 @@ test.describe('Describe', () => {
         await expect(page.locator('//*[@data-testid="interactions-table-row-1"]')).toContainText('Авторизація')
     });
 
-    console.log(typeof NaN);
 });
