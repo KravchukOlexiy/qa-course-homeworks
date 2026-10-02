@@ -51,6 +51,13 @@ export default defineConfig({
         testIdAttribute: 'data-test',
       },
     },
+    {
+      name: 'variables',
+      testDir: 'tests/variables-hw',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
 
     // {
     //   name: 'firefox',

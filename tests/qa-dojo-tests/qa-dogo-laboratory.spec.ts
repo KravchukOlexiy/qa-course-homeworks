@@ -32,4 +32,5 @@ test.describe('Describe', () => {
         await expect(page.locator('//*[@data-testid="interactions-table-row-4"]')).toContainText('Завантаження файлу')
         await expect(page.locator('//*[@data-testid="interactions-table-row-1"]')).toContainText('Авторизація')
     });
+
 });
