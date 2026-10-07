@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { openCoffeeCart, clickOnCoffeeCard, hoverCheckout, clickCheckout, fillAndSubmitRegistrationForm } from './coffe-card-actions.spec'
+import { openCoffeeCart, clickOnCoffeeCard, hoverCheckout, clickCheckout, fillAndSubmitRegistrationForm } from './coffe-card-actions'
 
 test.beforeEach('Open site', async ({ page }) => {
     await openCoffeeCart(page);
