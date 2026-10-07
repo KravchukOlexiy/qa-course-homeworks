@@ -2,7 +2,7 @@ import { Page } from '@playwright/test'
 
 
 export async function openCoffeeCart(page: Page) {
-    await page.goto('https://coffee-cart.app/');
+    await page.goto('');
 }
 
 export async function clickOnCoffeeCard(page: Page, coffeeName: string) {
