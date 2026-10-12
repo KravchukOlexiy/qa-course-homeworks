@@ -9,7 +9,7 @@ test('All 10 articles should be created after creating 10 articles via loop', as
   await page.goto('/articles/login');
   await login(page, 'olena@example.com', 'password');
 
-  for (let i = 0; i > 10; i++) {
+  for (let i = 0; i < 10; i++) {
     title = 'Title ' + Date.now() + ' ' + i
     await createArticle(page, title, 'description', 'body');
     titles.push(title)
