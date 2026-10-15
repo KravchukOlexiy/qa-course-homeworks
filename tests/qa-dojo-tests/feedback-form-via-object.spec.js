@@ -1,53 +1,57 @@
 import { test, expect } from '@playwright/test'
 
-test('Send form with different data should be successful', async ({ page }) => {
+const data = {
+    name: 'test',
+    email: 'test@gm.com',
+    theme: 'feature',
+    priority: 'contact-priority-high',
+    message: 'Message',
+    attachment: 'png.png',
+    isCopyNeeded: true
+}
 
-    const data = {
-        name: 'test',
-        email: 'test@gm.com',
-        theme: 'feature',
-        priority: 'contact-priority-high',
-        message: 'Message',
-        attachment: 'png.png',
-        isCopyNeeded: true,
-        expectedPositive: async function () {
-            await expect(page.getByTestId('contact-success').getByRole('paragraph')).toContainText(`Ваше звернення надіслано. Ми відповімо на ${formDatas[0].email}.`)
-        },
-        expectedNegative: async function () {
-            await expect(page.getByTestId('error-messages')).toContainText('name обов\'язкове поле');
-            await expect(page.getByTestId('error-messages')).toContainText('email некоректний email');
-            await expect(page.getByTestId('error-messages')).toContainText('message обов\'язкове поле');
-        }
-    }
+async function expectSuccess(page, formData) {
+    await expect(page.getByTestId('contact-success').getByRole('paragraph')).toContainText(`Ваше звернення надіслано. Ми відповімо на ${formData.email}.`)
+}
 
+async function expectValidationErrors(page) {
+    await expect(page.getByTestId('error-messages')).toContainText('name обов\'язкове поле');
+    await expect(page.getByTestId('error-messages')).toContainText('email некоректний email');
+    await expect(page.getByTestId('error-messages')).toContainText('message обов\'язкове поле');
+}
 
-    const formDatas = [
-        {
-            name: data.name,
-            email: data.email,
-            theme: data.theme,
-            priority: data.priority,
-            message: data.message,
-            attachment: data.attachment,
-            isCopyNeeded: data.isCopyNeeded,
-            expected: data.expectedPositive
-        },
-        {
-            name: data.name,
-            email: data.email,
-            message: data.message,
-            expected: data.expectedPositive
-        },
-        {
-            theme: data.theme,
-            priority: data.priority,
-            attachment: data.attachment,
-            isCopyNeeded: data.isCopyNeeded,
-            expected: data.expectedNegative
-        }];
+const formDatas = [
+    {
+        title: 'all fields filled',
+        name: data.name,
+        email: data.email,
+        theme: data.theme,
+        priority: data.priority,
+        message: data.message,
+        attachment: data.attachment,
+        isCopyNeeded: data.isCopyNeeded,
+        expected: expectSuccess
+    },
+    {
+        title: 'only required fields filled',
+        name: data.name,
+        email: data.email,
+        message: data.message,
+        expected: expectSuccess
+    },
+    {
+        title: 'required fields are empty',
+        theme: data.theme,
+        priority: data.priority,
+        attachment: data.attachment,
+        isCopyNeeded: data.isCopyNeeded,
+        expected: expectValidationErrors
+    }];
 
-    for (const formData of formDatas) {
+for (const formData of formDatas) {
+    test(`Send feedback form: ${formData.title}`, async ({ page }) => {
         await page.goto('/articles/contact');
+
         if (formData.name !== undefined) {
             await page.getByTestId('contact-name').fill(formData.name);
         }
@@ -77,6 +81,6 @@ test('Send form with different data should be successful', async ({ page }) => {
         }
 
         await page.getByTestId('contact-submit').click();
-        await formData.expected()
-    }
-})
+        await formData.expected(page, formData);
+    })
+}
